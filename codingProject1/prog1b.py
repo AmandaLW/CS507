@@ -5,11 +5,11 @@ import os,sys
 
 totalFP = 0
 totalTP = 0
-totalFN = 0
+totalFN  = 0
 totalFunc = 0
 precision = 0
 recall = 0
-f1 =0
+f1  = 0
 
 def main():
 
@@ -24,22 +24,31 @@ def main():
    args = parser.parse_args()
    fileName=args.file1
    fileName2=args.file2
+
    fullFileName=os.path.abspath(fileName)
    fullFileName2=os.path.abspath(fileName2)
-   print1(fileName,processFile(fullFileName))
-   processFile(fullFileName2)  
+
+   precision1, recall1, f11 = processFile(fullFileName)
+   precision2, recall2, f12 = processFile(fullFileName2)
+
+   precisionAv = (precision1 + precision2)/2
+   recallAv = (precision1 + precision2) /2
+   f1Av = (f11 + f12)/2
+
+   printAv(precisionAv, recallAv, f1Av)
+   
+   
 
 
 
 def processFile(fileName):
-
    totalFP = 0
    totalTP = 0
-   totalFN = 0
+   totalFN  = 0
    totalFunc = 0
    precision = 0
    recall = 0
-   f1 =0
+   f1  = 0
 
    with open(fileName,'r') as fn:
       headers=fn.readline().strip().split(',')
@@ -68,29 +77,35 @@ def processFile(fileName):
          FuncNumber = int(words[4])
          totalFunc = totalFunc + FuncNumber
 
+   print("For file: ", fileName)
+   print("Total FP: ", totalFP)
+   print("Total TP: ", totalTP)
+   print("Total FN: ", totalFN)
+   print("Total func: ", totalFunc, "\n")
+
    precision = totalTP / (totalTP + totalFP)
    recall = totalTP/(totalTP + totalFN)
    f1 = (precision * recall) / ((1/2) * (precision + recall))
 
-   #print("For file: ", fileName)
-   #print("Total FP: ", totalFP)
-   #print("Total TP: ", totalTP)
-   #print("Total FN: ", totalFN)
-   #print("Total func: ", totalFunc, "\n")
+   precisionRounded = round(precision,2)
+   recallRounded = round(recall,2)
+   f1Rounded = round(f1,2)
 
-   print("Precision: ", round(precision,2))
-   print("Recall: ", round(recall,2))
-   print("F1: ", round(f1,2))
+   print("Precision: ", precisionRounded)
+   print("Recall: ", recallRounded)
+   print("F1: ", f1Rounded)
 
-   return fileName, totalFP, totalTP, totalFN, totalFunc
+   return precisionRounded, recallRounded, f1Rounded
+
+def printAv(precision, recall, f1):
+    print("Avg Precision: ", precision)
+    print("Avg Recall: ", recall)
+    print("Avg F1: ", f1)
+
+
          
          
-def print1(fileName, function):
-    print("For file: ", fileName)
-    print("Total FP: ", totalFP)
-    print("Total TP: ", totalTP)
-    print("Total FN: ", totalFN)
-    print("Total func: ", totalFunc, "\n")
+
 
 
 
