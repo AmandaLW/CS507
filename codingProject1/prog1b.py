@@ -10,12 +10,16 @@ def main():
                                     formatter_class=formatter)
 
    required = parser.add_argument_group(title='required')
-   required.add_argument('file1', type=str, help='data file to read')
-
+   required.add_argument('file1',  type=str, help='data file to read')
+   required.add_argument('file2',  type=str, help='data file to read')
+   
    args = parser.parse_args()
    fileName=args.file1
+   fileName2=args.file2
    fullFileName=os.path.abspath(fileName)
-   processFile(fullFileName)   
+   fullFileName2=os.path.abspath(fileName2)
+   processFile(fullFileName)
+   processFile(fullFileName2)  
 
 
 
@@ -31,7 +35,7 @@ def processFile(fileName):
 
    with open(fileName,'r') as fn:
       headers=fn.readline().strip().split(',')
-      print('Headers = {!s}'.format(headers))
+      #Sprint('Headers = {!s}'.format(headers))
       lineCnt=0
       #hold =[]
       for line in fn:
