@@ -52,6 +52,10 @@ def processFile(fileName):
          FNnumber = int(words[3])
          totalFN = totalFN + FNnumber
 
+         #find and tally up all func
+         FuncNumber = int(words[4])
+         totalFunc = totalFunc + FuncNumber
+
    print("For file: ", fileName)
    print("Total FP: ", totalFP)
    print("Total TP: ", totalTP)
