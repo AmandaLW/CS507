@@ -56,15 +56,19 @@ def processFile(fileName):
          FuncNumber = int(words[4])
          totalFunc = totalFunc + FuncNumber
 
+   precision = totalTP / (totalTP + totalFP)
+   recall = totalTP/(totalTP + totalFN)
+   f1 = (precision * recall) / ((1/2) * (precision + recall))
+
    print("For file: ", fileName)
    print("Total FP: ", totalFP)
    print("Total TP: ", totalTP)
    print("Total FN: ", totalFN)
    print("Total func: ", totalFunc, "\n")
 
-   print("Precision: ", precision)
-   print("Recall: ", recall)
-   print("F1: ", f1)
+   print("Precision: ", round(precision,2))
+   print("Recall: ", round(recall,2))
+   print("F1: ", round(f1,2))
          
          
          
