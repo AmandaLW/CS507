@@ -51,12 +51,25 @@ def processFile(fileName):
    f1  = 0
 
    with open(fileName,'r') as fn:
-      headers=fn.readline().strip().split(',')
-      print('Headers = {!s}'.format(headers))
-      headers.append('Prec')
-      headers.append('Recall')
-      headers.append("F1")
-      print('Headers = {!s}'.format(headers))
+      #headers=fn.readline().strip().split(',')
+      headers=fn.readline().strip()
+      
+      
+      addPrec = headers + ",Prec"
+      addRecall = addPrec + ",Recall"
+      builtUpHeader = addRecall + ",F1"
+      
+      #print('Headers = {!s}'.format(headers))
+
+      write_file = "output.csv"
+      with open(write_file, "w") as output:
+        for line in builtUpHeader:
+            output.write(" ".join(line))
+
+      with open(write_file, "a") as output:
+            output.writelines("\n")
+    
+
       
 
       lineCnt=0
@@ -64,7 +77,9 @@ def processFile(fileName):
          lineCnt+=1
          line = line.strip()  # to remove extra white space
          words = line.split(',')
-         #print('{:4d}: {!s}'.format(lineCnt,words))
+         #print('{:4d}: {!s}'.format(lineCnt,words))\
+
+         name =words[0]
 
          #find and tally up the FP
          FPnumber = int(words[1])
@@ -96,6 +111,18 @@ def processFile(fileName):
          recallRounded = round(recall,2)
          f1Rounded = round(f1,2)
 
+         thickyBoyLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
+
+
+
+         
+                
+         with open(write_file, "a") as output:
+            for line in thickyBoyLine:
+                output.write(" ".join(line))
+         with open(write_file, "a") as output:
+                output.writelines("\n")        
+
          #print("Precision: ", precisionRounded)
          #print("Recall: ", recallRounded)
          #print("F1: ", f1Rounded)
@@ -106,15 +133,7 @@ def printAv(precision, recall, f1):
     print("Avg Precision: ", precision)
     print("Avg Recall: ", recall)
     print("Avg F1: ", f1)
-
-
-         
-         
-
-
-
-
-         
+      
     
 if __name__ == "__main__":
     main()
