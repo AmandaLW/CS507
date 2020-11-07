@@ -3,14 +3,6 @@
 import argparse
 import os,sys
 
-totalFP = 0
-totalTP = 0
-totalFN  = 0
-totalFunc = 0
-precision = 0
-recall = 0
-f1  = 0
-
 def main():
 
    formatter = argparse.ArgumentDefaultsHelpFormatter
