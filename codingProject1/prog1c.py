@@ -47,7 +47,7 @@ def processFile(fileName):
       
       #print('Headers = {!s}'.format(headers))
 
-      write_file = "output.csv"
+      write_file = "compare.csv"
       with open(write_file, "w") as output:
         for line in builtUpHeader:
             output.write(" ".join(line))
