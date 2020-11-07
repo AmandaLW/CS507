@@ -79,9 +79,9 @@ def processFile(fileName):
          recall = TPnumber/(TPnumber + FNnumber)
          f1 = (precision * recall) / ((1/2) * (precision + recall))
 
-         precisionRounded = round(precision,2)
-         recallRounded = round(recall,2)
-         f1Rounded = round(f1,2)
+         precisionRounded = round(precision,4)
+         recallRounded = round(recall,4)
+         f1Rounded = round(f1,4)
 
          thickyBoyLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
        
