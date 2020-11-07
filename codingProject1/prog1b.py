@@ -19,23 +19,23 @@ def main():
 
    required = parser.add_argument_group(title='required')
    required.add_argument('file1',  type=str, help='data file to read')
-   required.add_argument('file2',  type=str, help='data file to read')
+   
    
    args = parser.parse_args()
    fileName=args.file1
-   fileName2=args.file2
+   
 
    fullFileName=os.path.abspath(fileName)
-   fullFileName2=os.path.abspath(fileName2)
+   
 
    precision1, recall1, f11 = processFile(fullFileName)
-   precision2, recall2, f12 = processFile(fullFileName2)
+   
 
-   precisionAv = (precision1 + precision2)/2
-   recallAv = (precision1 + precision2) /2
-   f1Av = (f11 + f12)/2
+   #precisionAv = (precision1 + precision2)/2
+   #recallAv = (precision1 + precision2) /2
+   #f1Av = (f11 + f12)/2
 
-   printAv(precisionAv, recallAv, f1Av)
+   #printAv(precisionAv, recallAv, f1Av)
    
    
 
@@ -52,9 +52,14 @@ def processFile(fileName):
 
    with open(fileName,'r') as fn:
       headers=fn.readline().strip().split(',')
-      #Sprint('Headers = {!s}'.format(headers))
+      print('Headers = {!s}'.format(headers))
+      headers.append('Prec')
+      headers.append('Recall')
+      headers.append("F1")
+      print('Headers = {!s}'.format(headers))
+      
+
       lineCnt=0
-      #hold =[]
       for line in fn:
          lineCnt+=1
          line = line.strip()  # to remove extra white space
@@ -63,37 +68,37 @@ def processFile(fileName):
 
          #find and tally up the FP
          FPnumber = int(words[1])
-         totalFP = totalFP + FPnumber
+         
          
          #find and tally up TP
          TPnumber = int(words[2])
-         totalTP = totalTP + TPnumber
+         
 
          #find and tally up total FN
          FNnumber = int(words[3])
-         totalFN = totalFN + FNnumber
+         
 
          #find and tally up all func
          FuncNumber = int(words[4])
-         totalFunc = totalFunc + FuncNumber
+         
 
-   print("For file: ", fileName)
-   print("Total FP: ", totalFP)
-   print("Total TP: ", totalTP)
-   print("Total FN: ", totalFN)
-   print("Total func: ", totalFunc, "\n")
+   #print("For file: ", fileName)
+   #print("Total FP: ", totalFP)
+   #print("Total TP: ", totalTP)
+   #print("Total FN: ", totalFN)
+   #print("Total func: ", totalFunc, "\n")
 
-   precision = totalTP / (totalTP + totalFP)
-   recall = totalTP/(totalTP + totalFN)
-   f1 = (precision * recall) / ((1/2) * (precision + recall))
+         precision = TPnumber / (TPnumber + FPnumber)
+         recall = TPnumber/(TPnumber + FNnumber)
+         f1 = (precision * recall) / ((1/2) * (precision + recall))
 
-   precisionRounded = round(precision,2)
-   recallRounded = round(recall,2)
-   f1Rounded = round(f1,2)
+         precisionRounded = round(precision,2)
+         recallRounded = round(recall,2)
+         f1Rounded = round(f1,2)
 
-   print("Precision: ", precisionRounded)
-   print("Recall: ", recallRounded)
-   print("F1: ", f1Rounded)
+         #print("Precision: ", precisionRounded)
+         #print("Recall: ", recallRounded)
+         #print("F1: ", f1Rounded)
 
    return precisionRounded, recallRounded, f1Rounded
 
