@@ -19,27 +19,11 @@ def main():
 
    required = parser.add_argument_group(title='required')
    required.add_argument('file1',  type=str, help='data file to read')
-   
-   
    args = parser.parse_args()
    fileName=args.file1
-   
-
    fullFileName=os.path.abspath(fileName)
-   
-
    precision1, recall1, f11 = processFile(fullFileName)
    
-
-   #precisionAv = (precision1 + precision2)/2
-   #recallAv = (precision1 + precision2) /2
-   #f1Av = (f11 + f12)/2
-
-   #printAv(precisionAv, recallAv, f1Av)
-   
-   
-
-
 
 def processFile(fileName):
    totalFP = 0
@@ -70,8 +54,6 @@ def processFile(fileName):
             output.writelines("\n")
     
 
-      
-
       lineCnt=0
       for line in fn:
          lineCnt+=1
@@ -84,25 +66,15 @@ def processFile(fileName):
          #find and tally up the FP
          FPnumber = int(words[1])
          
-         
          #find and tally up TP
          TPnumber = int(words[2])
          
-
          #find and tally up total FN
          FNnumber = int(words[3])
          
-
          #find and tally up all func
          FuncNumber = int(words[4])
          
-
-   #print("For file: ", fileName)
-   #print("Total FP: ", totalFP)
-   #print("Total TP: ", totalTP)
-   #print("Total FN: ", totalFN)
-   #print("Total func: ", totalFunc, "\n")
-
          precision = TPnumber / (TPnumber + FPnumber)
          recall = TPnumber/(TPnumber + FNnumber)
          f1 = (precision * recall) / ((1/2) * (precision + recall))
@@ -112,20 +84,12 @@ def processFile(fileName):
          f1Rounded = round(f1,2)
 
          thickyBoyLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
-
-
-
-         
-                
+       
          with open(write_file, "a") as output:
             for line in thickyBoyLine:
                 output.write(" ".join(line))
          with open(write_file, "a") as output:
                 output.writelines("\n")        
-
-         #print("Precision: ", precisionRounded)
-         #print("Recall: ", recallRounded)
-         #print("F1: ", f1Rounded)
 
    return precisionRounded, recallRounded, f1Rounded
 
