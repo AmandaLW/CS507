@@ -22,11 +22,8 @@ def main():
    fullFileName=os.path.abspath(fileName)
    fullFileName2=os.path.abspath(fileName2)
    avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName, 1)
-   processFile(fullFileName2, 2)
-   #printAv(avgPrecision, avgRecall, avgF1, totalLines)
-
-   #for x, y in file1dic.items():
-       #print(x,y)
+   avgPrecision2, avgRecall2, avgF12, totalLines2 =processFile(fullFileName2, 2)
+   printAv(avgPrecision, avgRecall, avgF1, totalLines, avgPrecision2, avgRecall2, avgF12, totalLines2)
 
    file1MinusFile2()
 
@@ -34,17 +31,10 @@ def main():
 
 #fileName takes the name of the file and "file" tells it what file/dictonary to fill
 def processFile(fileName, file):
-   totalFP = 0
-   totalTP = 0
-   totalFN  = 0
-   totalFunc = 0
-   precision = 0
-   recall = 0
-   f1  = 0
+
    avgPrecision = 0
    avgRecall = 0
    avgF1 = 0
-   totalLines = 0
 
    with open(fileName,'r') as fn:
       #headers=fn.readline().strip().split(',')
@@ -101,27 +91,24 @@ def processFile(fileName, file):
             file1dic[words[0]] = {'FP': words[1], 'TP': words[2], 'FN': words[3], "Total": words[4], "Prec": str(precisionRounded), "Recall": (recallRounded), "F1": (f1Rounded)}
          if file == 2:
             file2dic[words[0]] = {'FP': words[1], 'TP': words[2], 'FN': words[3], "Total": words[4], "Prec": str(precisionRounded), "Recall": (recallRounded), "F1": (f1Rounded)}
-
-         #thicciBoiLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
-       
-         #with open(write_file, "a") as output:
-            #for line in thicciBoiLine:
-                #output.write(" ".join(line))
-         #with open(write_file, "a") as output:
-                #output.writelines("\n")  
-
-      #for x, y in file1dic.items():
-        #print(x,y)      
-
+     
    return avgPrecision, avgRecall, avgF1, totalLines
 
-def printAv(avgPrecision, avgRecall, avgF1, totalLines):
-    precision = avgPrecision/totalLines
-    recall = avgRecall/totalLines
-    f1 = avgF1/totalLines
-    print("Avg Precision: ", round(precision,2))
-    print("Avg Recall: ", round(recall,2))
-    print("Avg F1: ", round( f1,2))
+def printAv(avgPrecision, avgRecall, avgF1, totalLines, avgPrecision2, avgRecall2, avgF12, totalLines2):
+    FirstPrecision = avgPrecision/totalLines
+    FirstRecall = avgRecall/totalLines
+    firstF1 = avgF1/totalLines
+    SecondPrecision = avgPrecision2/totalLines2
+    SecondRecall = avgRecall2/totalLines2
+    SecondF1 = avgF12/totalLines2
+
+    #calculate difference in averages
+    firstPrecMinussecond = FirstPrecision - SecondPrecision
+    firstRecallMinusSecond = FirstRecall - SecondRecall
+    firstF1MinusSecond = firstF1 - SecondF1
+    print("Avg Precision: ", round(firstPrecMinussecond,2))
+    print("Avg Recall: ", round(firstRecallMinusSecond,2))
+    print("Avg F1: ", round( firstF1MinusSecond,2))
 
 def file1MinusFile2():
     
