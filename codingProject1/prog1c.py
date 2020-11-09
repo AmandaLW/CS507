@@ -3,11 +3,9 @@
 import argparse
 import os,sys
 
+#Dictionaries for storing each of the files being read in 
 file1dic = {}
 file2dic = {}
-
-
-
 
 def main():
 
@@ -23,15 +21,16 @@ def main():
    fileName2=args.file2
    fullFileName=os.path.abspath(fileName)
    fullFileName2=os.path.abspath(fileName2)
-   avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName)
-   processFile(fullFileName2)
+   avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName, 1)
+   processFile(fullFileName2, 2)
    printAv(avgPrecision, avgRecall, avgF1, totalLines)
 
    for x, y in file1dic.items():
        print(x,y)
    
 
-def processFile(fileName):
+#fileName takes the name of the file and "file" tells it what file/dictonary to fill
+def processFile(fileName, file):
    totalFP = 0
    totalTP = 0
    totalFN  = 0
@@ -94,8 +93,11 @@ def processFile(fileName):
          avgRecall = avgRecall + recallRounded
          avgF1 = avgF1 + f1Rounded
          totalLines = lineCnt -1
-
-         file1dic[words[0]] = {'FP': words[1], 'TP': words[2], 'FN': words[3], "Total": words[4], "Prec": str(precisionRounded), "Recall": (recallRounded), "F1": (f1Rounded)}
+         
+         if file == 1:
+            file1dic[words[0]] = {'FP': words[1], 'TP': words[2], 'FN': words[3], "Total": words[4], "Prec": str(precisionRounded), "Recall": (recallRounded), "F1": (f1Rounded)}
+         if file == 2:
+            file2dic[words[0]] = {'FP': words[1], 'TP': words[2], 'FN': words[3], "Total": words[4], "Prec": str(precisionRounded), "Recall": (recallRounded), "F1": (f1Rounded)}
 
          thicciBoiLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
        
