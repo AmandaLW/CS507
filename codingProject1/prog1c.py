@@ -27,6 +27,8 @@ def main():
 
    for x, y in file1dic.items():
        print(x,y)
+
+   file1MinusFile2()
    
 
 #fileName takes the name of the file and "file" tells it what file/dictonary to fill
@@ -119,6 +121,18 @@ def printAv(avgPrecision, avgRecall, avgF1, totalLines):
     print("Avg Precision: ", round(precision,2))
     print("Avg Recall: ", round(recall,2))
     print("Avg F1: ", round( f1,2))
+
+def file1MinusFile2():
+    precMinusPrec = 0
+    recallMinusRecall = 0
+    F1MinusF1 = 0
+
+    for key in file1dic.keys():
+        if key in file2dic:
+            
+            print(key)
+
+
       
     
 if __name__ == "__main__":
