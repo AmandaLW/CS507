@@ -23,12 +23,13 @@ def main():
    fullFileName2=os.path.abspath(fileName2)
    avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName, 1)
    processFile(fullFileName2, 2)
-   printAv(avgPrecision, avgRecall, avgF1, totalLines)
+   #printAv(avgPrecision, avgRecall, avgF1, totalLines)
 
-   for x, y in file1dic.items():
-       print(x,y)
+   #for x, y in file1dic.items():
+       #print(x,y)
 
    file1MinusFile2()
+
    
 
 #fileName takes the name of the file and "file" tells it what file/dictonary to fill
@@ -101,13 +102,13 @@ def processFile(fileName, file):
          if file == 2:
             file2dic[words[0]] = {'FP': words[1], 'TP': words[2], 'FN': words[3], "Total": words[4], "Prec": str(precisionRounded), "Recall": (recallRounded), "F1": (f1Rounded)}
 
-         thicciBoiLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
+         #thicciBoiLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
        
-         with open(write_file, "a") as output:
-            for line in thicciBoiLine:
-                output.write(" ".join(line))
-         with open(write_file, "a") as output:
-                output.writelines("\n")  
+         #with open(write_file, "a") as output:
+            #for line in thicciBoiLine:
+                #output.write(" ".join(line))
+         #with open(write_file, "a") as output:
+                #output.writelines("\n")  
 
       #for x, y in file1dic.items():
         #print(x,y)      
@@ -123,14 +124,33 @@ def printAv(avgPrecision, avgRecall, avgF1, totalLines):
     print("Avg F1: ", round( f1,2))
 
 def file1MinusFile2():
-    precMinusPrec = 0
-    recallMinusRecall = 0
-    F1MinusF1 = 0
-
+    
     for key in file1dic.keys():
+        prec1 = file1dic[key]["Prec"]
+        recall1 = file1dic[key]["Recall"]
+        F11= file1dic[key]["F1"]
         if key in file2dic:
+             prec2 = file2dic[key]["Prec"]
+             recall2 = file2dic[key]["Recall"]
+             F12= file2dic[key]["F1"]
+
+             precdiff = float(prec1)-float(prec2)
+             recalldiff = float(recall1)-float(recall2)
+             f1diff = float(F11)-float(F12)
+
+             insertMinus = key +","+str(precdiff)+","+str(recalldiff)+","+str(f1diff)
+             write_file = "compare.csv"
+             with open(write_file, "a") as output:
+                for line in insertMinus:
+                 output.write(" ".join(line))
+             with open(write_file, "a") as output:
+                 output.writelines("\n")  
             
-            print(key)
+
+
+        
+            
+
 
 
       
