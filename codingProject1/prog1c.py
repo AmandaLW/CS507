@@ -40,16 +40,13 @@ def processFile(fileName):
       #headers=fn.readline().strip().split(',')
       headers=fn.readline().strip()
       
-      
-      addPrec = headers + ",Prec"
-      addRecall = addPrec + ",Recall"
-      builtUpHeader = addRecall + ",F1"
+      newHeader = "name " + ",Prec " +",Recall ", ",F1"
       
       #print('Headers = {!s}'.format(headers))
 
       write_file = "compare.csv"
       with open(write_file, "w") as output:
-        for line in builtUpHeader:
+        for line in newHeader:
             output.write(" ".join(line))
 
       with open(write_file, "a") as output:
