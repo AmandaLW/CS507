@@ -3,11 +3,15 @@
 import argparse
 import os,sys
 
+file1dic = {'Name': 'name', 'FP': 'fp', 'TP':'tp','FN': 'fn', 'Total':'total','Prec':'prec', 'Recall':'recall', 'F1':'f1'}
+file1dic2 = {'Name': 'name', 'FP': 'fp', 'TP':'tp','FN': 'fn', 'Total':'total','Prec':'prec', 'Recall':'recall', 'F1':'f1'}
+
+
 
 
 def main():
 
-   formatter = argparse.ArgumentDefaultsHelpFormatter
+   formatter = argparse.ArgumentDefaultsHelhon pFormatter
    parser = argparse.ArgumentParser(description='CS 507 csv reader',
                                     formatter_class=formatter)
 
@@ -20,6 +24,7 @@ def main():
    fullFileName=os.path.abspath(fileName)
    fullFileName2=os.path.abspath(fileName2)
    avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName)
+   processFile(fullFileName2)
    printAv(avgPrecision, avgRecall, avgF1, totalLines)
    
 
