@@ -3,15 +3,15 @@
 import argparse
 import os,sys
 
-file1dic = {'Name': 'name', 'FP': 'fp', 'TP':'tp','FN': 'fn', 'Total':'total','Prec':'prec', 'Recall':'recall', 'F1':'f1'}
-file1dic2 = {'Name': 'name', 'FP': 'fp', 'TP':'tp','FN': 'fn', 'Total':'total','Prec':'prec', 'Recall':'recall', 'F1':'f1'}
+file1dic = {}
+file2dic = {}
 
 
 
 
 def main():
 
-   formatter = argparse.ArgumentDefaultsHelhon pFormatter
+   formatter = argparse.ArgumentDefaultsHelpFormatter
    parser = argparse.ArgumentParser(description='CS 507 csv reader',
                                     formatter_class=formatter)
 
@@ -26,6 +26,9 @@ def main():
    avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName)
    processFile(fullFileName2)
    printAv(avgPrecision, avgRecall, avgF1, totalLines)
+
+   for x, y in file1dic.items():
+       print(x,y)
    
 
 def processFile(fileName):
@@ -92,13 +95,18 @@ def processFile(fileName):
          avgF1 = avgF1 + f1Rounded
          totalLines = lineCnt -1
 
+         file1dic[words[0]] = {'FP': words[1], 'TP': words[2], 'FN': words[3], "Total": words[4], "Prec": str(precisionRounded), "Recall": (recallRounded), "F1": (f1Rounded)}
+
          thicciBoiLine = words[0] +","+words[1]+","+words[2]+","+words[3]+","+words[4]+","+str(precisionRounded)+","+str(recallRounded)+","+str(f1Rounded)
        
          with open(write_file, "a") as output:
             for line in thicciBoiLine:
                 output.write(" ".join(line))
          with open(write_file, "a") as output:
-                output.writelines("\n")        
+                output.writelines("\n")  
+
+      #for x, y in file1dic.items():
+        #print(x,y)      
 
    return avgPrecision, avgRecall, avgF1, totalLines
 
