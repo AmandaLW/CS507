@@ -106,9 +106,10 @@ def printAv(avgPrecision, avgRecall, avgF1, totalLines, avgPrecision2, avgRecall
     firstPrecMinussecond = FirstPrecision - SecondPrecision
     firstRecallMinusSecond = FirstRecall - SecondRecall
     firstF1MinusSecond = firstF1 - SecondF1
-    print("Avg Precision: ", round(firstPrecMinussecond,2))
-    print("Avg Recall: ", round(firstRecallMinusSecond,2))
-    print("Avg F1: ", round( firstF1MinusSecond,2))
+    print("differences in Avergages")
+    print("Avg Precision diff: ", round(firstPrecMinussecond,2))
+    print("Avg Recall diff: ", round(firstRecallMinusSecond,2))
+    print("Avg F1 diff: ", round( firstF1MinusSecond,2))
 
 def file1MinusFile2():
     
