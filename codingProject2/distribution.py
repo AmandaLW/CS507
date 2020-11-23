@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 import random
      
@@ -32,45 +33,6 @@ def main():
     for i in range(1000):
      data4.append(random.betavariate(0.5,0.5))
 
-#first 
-      write_file = "random.csv"
-      with open(write_file, "w") as output:
-        for line in builtUpHeader:
-            output.write(" ".join(line))
-
-      with open(write_file, "a") as output:
-            output.writelines("\n")
-
-#second
-
-          write_file = "normal.csv"
-      with open(write_file, "w") as output:
-        for line in builtUpHeader:
-            output.write(" ".join(line))
-
-      with open(write_file, "a") as output:
-            output.writelines("\n")
-
-#third
-      write_file = "expo.csv"
-      with open(write_file, "w") as output:
-        for line in builtUpHeader:
-            output.write(" ".join(line))
-
-      with open(write_file, "a") as output:
-            output.writelines("\n")
-
-#fourth
-
-      write_file = "beta.csv"
-      with open(write_file, "w") as output:
-        for line in builtUpHeader:
-            output.write(" ".join(line))
-
-      with open(write_file, "a") as output:
-            output.writelines("\n")
-
-
     maxY=max(data)
     plt.figure(figsize=(8,8))
     plt.subplot(2,1,1)
@@ -96,6 +58,40 @@ def main():
     plt.hist(data,numBins)
     plt.title('Histogram of Uniform Distribution')
     plt.savefig('normal.png')
+
+    
+#first 
+    write_file = "random.csv"
+    with open(write_file, "w") as output:
+        for number in data:
+            np.savetxt('random.csv', data, fmt = '%.6f')
+            
+
+
+#second
+
+    write_file = "normal.csv"
+    with open(write_file, "w") as output:
+        for number in data2:
+            np.savetxt('normal.csv', data2, fmt = '%.6f')
+
+
+
+#third
+    write_file = "expo.csv"
+    with open(write_file, "w") as output:
+        for number in data3:
+            np.savetxt('expo.csv', data3, fmt = '%.6f')
+
+
+
+#fourth
+
+    write_file = "beta.csv"
+    with open(write_file, "w") as output:
+        for number in data4:
+            np.savetxt('beta.csv', data4, fmt = '%.6f')
+
          
 
      
