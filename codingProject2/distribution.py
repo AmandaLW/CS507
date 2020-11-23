@@ -32,6 +32,43 @@ def main():
     for i in range(1000):
      data4.append(random.betavariate(0.5,0.5))
 
+#first 
+      write_file = "random.csv"
+      with open(write_file, "w") as output:
+        for line in builtUpHeader:
+            output.write(" ".join(line))
+
+      with open(write_file, "a") as output:
+            output.writelines("\n")
+
+#second
+
+          write_file = "normal.csv"
+      with open(write_file, "w") as output:
+        for line in builtUpHeader:
+            output.write(" ".join(line))
+
+      with open(write_file, "a") as output:
+            output.writelines("\n")
+
+#third
+      write_file = "expo.csv"
+      with open(write_file, "w") as output:
+        for line in builtUpHeader:
+            output.write(" ".join(line))
+
+      with open(write_file, "a") as output:
+            output.writelines("\n")
+
+#fourth
+
+      write_file = "beta.csv"
+      with open(write_file, "w") as output:
+        for line in builtUpHeader:
+            output.write(" ".join(line))
+
+      with open(write_file, "a") as output:
+            output.writelines("\n")
 
 
     maxY=max(data)
