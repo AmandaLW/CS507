@@ -3,10 +3,10 @@
 import argparse
 import os,sys
 
-
+outputFileName = "parsedName"
 
 def main():
-
+   global outputFileName
    formatter = argparse.ArgumentDefaultsHelpFormatter
    parser = argparse.ArgumentParser(description='CS 507 csv reader',
                                     formatter_class=formatter)
@@ -16,8 +16,12 @@ def main():
    args = parser.parse_args()
    fileName=args.file1
    fullFileName=os.path.abspath(fileName)
+   fileNameSplit = fileName.split(".")
+   outputFileName = fileNameSplit[0]
+   print(outputFileName)
    avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName)
    printAv(avgPrecision, avgRecall, avgF1, totalLines)
+
    
 
 def processFile(fileName):
@@ -44,7 +48,7 @@ def processFile(fileName):
       
       #print('Headers = {!s}'.format(headers))
 
-      write_file = "output.csv"
+      write_file = outputFileName + "new.csv"
       with open(write_file, "w") as output:
         for line in builtUpHeader:
             output.write(" ".join(line))
