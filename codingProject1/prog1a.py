@@ -31,7 +31,7 @@ def processFile(fileName):
 
    with open(fileName,'r') as fn:
       headers=fn.readline().strip().split(',')
-      print('Headers = {!s}'.format(headers))
+      #print('Headers = {!s}'.format(headers))
       lineCnt=0
       #hold =[]
       for line in fn:
