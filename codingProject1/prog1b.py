@@ -18,7 +18,6 @@ def main():
    fullFileName=os.path.abspath(fileName)
    fileNameSplit = fileName.split(".")
    outputFileName = fileNameSplit[0]
-   print(outputFileName)
    avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName)
    printAv(avgPrecision, avgRecall, avgF1, totalLines)
 
@@ -68,12 +67,15 @@ def processFile(fileName):
 
          #find and tally up the FP
          FPnumber = int(words[1])
+         totalFP = totalFP + FPnumber
          
          #find and tally up TP
          TPnumber = int(words[2])
+         totalTP = totalTP + TPnumber
          
          #find and tally up total FN
          FNnumber = int(words[3])
+         totalFN = totalFN + FNnumber
          
          #find and tally up all func
          FuncNumber = int(words[4])
@@ -86,6 +88,8 @@ def processFile(fileName):
          recallRounded = round(recall,4)
          f1Rounded = round(f1,4)
 
+
+
          avgPrecision = avgPrecision + precisionRounded
          avgRecall = avgRecall + recallRounded
          avgF1 = avgF1 + f1Rounded
@@ -97,7 +101,21 @@ def processFile(fileName):
             for line in thicciBoiLine:
                 output.write(" ".join(line))
          with open(write_file, "a") as output:
-                output.writelines("\n")        
+                output.writelines("\n")
+
+   tprecision = totalTP / (totalTP + totalFP)
+   trecall = totalTP/(totalTP + totalFN)
+   tf1 = (tprecision * trecall) / ((1/2) * (tprecision + trecall))        
+
+   print("For file: ", fileName)
+   print("Total FP: ", totalFP)
+   print("Total TP: ", totalTP)
+   print("Total FN: ", totalFN)
+   print("Total func: ", totalFunc, "\n")
+
+   print("Precision: ", round(tprecision,2))
+   print("Recall: ", round(trecall,2))
+   print("F1: ", round(tf1,2), "\n" )
 
    return avgPrecision, avgRecall, avgF1, totalLines
 
