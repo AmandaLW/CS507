@@ -7,7 +7,12 @@ import os,sys
 file1dic = {}
 file2dic = {}
 
+outputFileNameP1 = "parsedNamePart1"
+outputFileNameP2 = "parsedNamePart2"
+
 def main():
+   global outputFileNameP1
+   global outputFileNameP2
 
    formatter = argparse.ArgumentDefaultsHelpFormatter
    parser = argparse.ArgumentParser(description='CS 507 csv reader',
@@ -21,6 +26,10 @@ def main():
    fileName2=args.file2
    fullFileName=os.path.abspath(fileName)
    fullFileName2=os.path.abspath(fileName2)
+   fileNameSplit = fileName.split(".")
+   outputFileNameP1 = fileNameSplit[0]
+   fileNameSplit2 = fileName2.split(".")
+   outputFileNameP2 = fileNameSplit2[0]
    avgPrecision, avgRecall, avgF1, totalLines = processFile(fullFileName, 1)
    avgPrecision2, avgRecall2, avgF12, totalLines2 =processFile(fullFileName2, 2)
    printAv(avgPrecision, avgRecall, avgF1, totalLines, avgPrecision2, avgRecall2, avgF12, totalLines2)
@@ -44,7 +53,7 @@ def processFile(fileName, file):
       
       #print('Headers = {!s}'.format(headers))
 
-      write_file = "compare.csv"
+      write_file = "compare_" + outputFileNameP1 + "_" + outputFileNameP2 + ".csv"
       with open(write_file, "w") as output:
         for line in newHeader:
             output.write(" ".join(line))
